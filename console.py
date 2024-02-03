@@ -10,6 +10,7 @@ class MyBase:
         # Discard the __class__ key if dict is not empty
         if kwargs:
             del kwargs["__class__"]
+            
             for key, val in kwargs.items():
                 # Grab date and time stamp keys and convert their values to datetime obj
                 if key == "created_at" or key == "updated_at":
@@ -17,11 +18,11 @@ class MyBase:
                     setattr(self, key, dtime_obj)
                 else:
                     setattr(self, key, val)
-                    
-        # Assign some common default attributes to all instances of this class
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        else:
+            # Create or assign ID, created_at and updated_at (new instances)
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def save_update(self):
         """Update updated_at attribute with current date and time"""
