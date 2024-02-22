@@ -9,9 +9,17 @@ class TestEmployee(unittest.TestCase):
 
     def setUp(self):
         """Create necessary items for test methods"""
-        my_employee = Employee('Iygeal', 'Anozie', '$300,000')
+        self.my_employee = Employee('Iygeal', 'Anozie', 300000)
 
     def test_give_default_raise(self):
         """Tests for default raise"""
-        default = my_employee.give_raise()
-        self.assertEqual
+        self.my_employee.give_raise()
+        self.assertEqual(self.my_employee.salary, 305000)
+
+    def test_give_custom_raise(self):
+        """Tests give_raise() with custom raise"""
+        self.my_employee.give_raise(30000)
+        self.assertEqual(self.my_employee.salary, 330000)
+        
+if __name__ == '__main__':
+    unittest.main()

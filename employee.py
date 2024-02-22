@@ -11,7 +11,6 @@ class Employee:
         self.last = last
         self.salary = salary
 
-    def give_raise(self, raise_salaray=5000):
+    def give_raise(self, raise_salary=5000):
         """Method to control salary raise"""
-        self.salary += raise_salaray
-
+        self.salary += raise_salary
