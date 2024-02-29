@@ -20,6 +20,6 @@ class TestEmployee(unittest.TestCase):
         """Tests give_raise() with custom raise"""
         self.my_employee.give_raise(30000)
         self.assertEqual(self.my_employee.salary, 330000)
-        
+
 if __name__ == '__main__':
     unittest.main()
