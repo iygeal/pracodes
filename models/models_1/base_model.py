@@ -2,7 +2,7 @@
 """"Module that defines the Basemodel class"""
 
 
-import uuid
+from uuid import uuid4
 from datetime import datetime
 
 class BaseModel:
@@ -10,7 +10,7 @@ class BaseModel:
 
     def __init__(self):
         """Basemodel class constructor method"""
-        self.id = uuid.uuid4()
+        self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = datetime.now()
 
@@ -29,4 +29,3 @@ class BaseModel:
         obj_serialized['created_at'] = obj_serialized['created_at'].isoformat()
         obj_serialized['updated_at'] = obj_serialized['updated_at'].isoformat()
         return obj_serialized
-
