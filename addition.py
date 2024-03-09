@@ -17,9 +17,10 @@ while True:
             print("Calculator closed")
             break
         second_number = int(second_number)
-        result = (first_number) + (second_number)
-
-        print(f"The sum of first number and second number is {result}")
 
     except ValueError:
         print("Please enter only numbers")
+
+    else:
+        result = (first_number) + (second_number)
+        print(f"The sum of first number and second number is {result}")
