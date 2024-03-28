@@ -6,7 +6,7 @@ import uuid
 from datetime import datetime
 
 class BaseModel:
-    """Parent class named Basemodel"""
+    """Parent class named BaseModel"""
 
     def __init__(self):
         """Basemodel class constructor method"""
