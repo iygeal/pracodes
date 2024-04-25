@@ -3,7 +3,7 @@
 
 from sqlalchemy import create_engine, text
 
-engine = create_engine("mysql:///sample.db")
+engine = create_engine("mysql:///sample")
 
 
 with engine.connect() as connection:
