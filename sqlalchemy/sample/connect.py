@@ -3,7 +3,8 @@
 
 from sqlalchemy import create_engine, text
 
-engine = create_engine("mysql:///sample")
+engine = create_engine(
+    "mysql://iygeal_alx:Alxstudent77!@localhost/sample", echo=True)
 
 
 with engine.connect() as connection:
