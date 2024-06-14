@@ -1,16 +1,23 @@
-#!/usr/bin/python3
-"""Testing route in flask"""
-
-from flask import Flask
+from flask import Flask, jsonify
+from flasgger import Swagger
 
 app = Flask(__name__)
+swagger = Swagger(app)
 
 
-@app.route('/name/<name>')
-def greeting(name):
-    """Greetings to name"""
-    return f"Hello, {name}"
+@app.route('/api/hello', methods=['GET'])
+def hello():
+    """
+    A simple hello world API
+    ---
+    responses:
+      200:
+        description: A successful response
+        examples:
+          application/json: {"message": "Hello, World!"}
+    """
+    return jsonify(message="Hello, World!")
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
