@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Item List</title>
+  </head>
+  <body>
+    <h1>My Items:</h1>
+    <ul>
+      {% for my_item in my_items %}
+      <li>{{ my_item }}</li>
+      {% endfor %}
+    </ul>
+
+    {% if not my_items %}
+    <p>No items available</p>
+    {% endif %}
+  </body>
+</html>
