@@ -1,0 +1,80 @@
+  GNU nano 4.8                                                                                        /etc/nginx/sites-enabled/remindme                                                                                                  
+server {
+    listen 80;
+    server_name 3.84.161.102;
+
+    # Max upload size
+    client_max_body_size 75M;
+
+    # Application server block
+    location / {
+        proxy_pass http://0.0.0.0:5000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_redirect off;
+    }
+
+    # API server block
+    location /api/v1/ {
+        proxy_pass http://0.0.0.0:5001;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_redirect off;
+
+        # Handle CORS
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+        add_header Access-Control-Allow-Headers 'Origin, X-Requested-With, Content-Type, Accept, Authorization';
+
+        # Handle preflight OPTIONS requests
+        if ($request_method = OPTIONS) {
+            add_header Access-Control-Allow-Origin *;
+            add_header Access-Control-Allow-Methods 'GET, POST, OPTIONS';
+            add_header Access-Control-Allow-Headers 'Origin, X-Requested-With, Content-Type, Accept, Authorization';
+            return 204;
+        }
+    }
+
+    # Static files
+    location /static/ {
+        alias /home/ubuntu/RemindMe/app/static/;
+		add_header Cache-Control "no-cache";
+    }
+
+    # Images
+    location /static/images/ {
+        alias /home/ubuntu/RemindMe/app/static/images/;
+		add_header Cache-Control "no-cache";
+    }
+
+    # CSS
+    location /static/styles/ {
+        alias /home/ubuntu/RemindMe/app/static/styles/;
+		add_header Cache-Control "no-cache";
+    }
+
+    # JavaScript
+    location /static/scripts/ {
+        alias /home/ubuntu/RemindMe/app/static/scripts/;
+		add_header Cache-Control "no-cache";
+    }
+
+    # Error pages
+    error_page 404 /404.html;
+    location = /404.html {
+        root /usr/share/nginx/html;
+        internal;
+    }
+
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+        internal;
+    }
+}
+
+

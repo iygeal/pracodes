@@ -1,0 +1,26 @@
+[Unit]
+Description=Gunicorn instance to serve RemindMe App
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/RemindMe
+
+Environment="PATH=/home/ubuntu/RemindMe/venv/bin"
+Environment="REMIND_ME_MYSQL_USER=remind_me_dev"
+Environment="REMIND_ME_MYSQL_PWD=Remind_me_dev_pwd1"
+Environment="REMIND_ME_MYSQL_HOST=localhost"
+Environment="REMIND_ME_MYSQL_DB=remind_me_dev_db"
+Environment="REMIND_ME_TYPE_STORAGE=db"
+
+ExecStart=/home/ubuntu/RemindMe/venv/bin/gunicorn --workers 3 --bind 0.0.0.0:5000 app.app:app
+
+# Always restart the service if it crashes
+Restart=always
+# The identifier for logging in syslog
+SyslogIdentifier=gunicorn
+
+[Install]
+WantedBy=multi-user.target
+
