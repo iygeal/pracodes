@@ -10,6 +10,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "kue": "^0.11.6",
     "redis": "^4.7.0"
   }
 }
