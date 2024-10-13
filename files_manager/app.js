@@ -1,22 +1,25 @@
+// app.js
 const express = require('express');
+const mongoose = require('mongoose');
+const authRoutes = require('./routes/auth');
+
 const app = express();
+app.use(express.json()); // Enable JSON body parsing
+
+// Connect to MongoDB
+mongoose
+  .connect('mongodb://localhost:27017/files_manager', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
+// Use auth routes
+app.use(authRoutes);
+
+// Start the server
 const port = 3000;
-
-// Middleware for parsing JSON
-app.use(express.json());
-
-// Routes
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to the Files Manager API.' });
-});
-
-const filesRoute = require('./routes/files');
-app.use('/files', filesRoute);
-
-const authRoute = require('./routes/auth');
-app.use('/auth', authRoute);
-
-// Start the express server
 app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
